@@ -87,6 +87,8 @@ Please open an issue or send a pull request. Thanks!
 
 ## Release History
 
+* 0.1.2 Fix path issues
+* 0.1.1 Remove unwanted helper
 * 0.1.0 Create willitmerge task
 
 ## License

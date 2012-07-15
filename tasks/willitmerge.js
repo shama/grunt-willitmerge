@@ -162,7 +162,7 @@ module.exports = function(grunt) {
                     });
                   } else {
                     // not authed, no post comment
-                    grunt.log.error('Please supply your github auth.username and auth.password to notify pull requesters.');
+                    grunt.log.error('Please supply your github auth.username and auth.password to notify pull requester.');
                     cleanUp(next);
                   }
 
