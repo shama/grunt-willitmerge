@@ -71,7 +71,7 @@ module.exports = function(grunt) {
   };
 
   // comment on the pull request that it is unmergeable
-  var notifyUnmergeable = function(data, done) {
+  var notifyUnmergeable = function(github, data, done) {
     data = _.defaults(data, {
       user: userRepo.user,
       repo: userRepo.repo,
@@ -79,8 +79,13 @@ module.exports = function(grunt) {
       body: 'Sorry, your pull request is unmergeable. ' +
         'Could you please rebase, squash and force push it? Thanks!'
     });
-    grunt.helper('github-post-comment', data, function githubPostComment(err, res) {
-      done(err, res);
+    if (_.isBlank(data.body) || data.number > 0) {
+      return done(); // add error
+    }
+    // TODO: Check if duplicate post
+    github.issues.createComment(data, function githubCreateComment(err, res) {
+      if (err) { throw err; }
+      done(null, res);
     });
   };
 
@@ -144,7 +149,7 @@ module.exports = function(grunt) {
                   if (isAuthed) {
                     rl.question('Notify pull requester this is unmergeable? [y/N]', function questionNotifyUnmergeable(answer) {
                      if (answer === 'y') {
-                       notifyUnmergeable({
+                       notifyUnmergeable(github, {
                          number: iss.number,
                          body: options.comment || null
                        }, function(err, res) {

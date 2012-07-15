@@ -81,24 +81,6 @@ grunt.helper('github', auth, function(err, github) {
 });
 ```
 
-### github-post-comment(data, callback(err, response))
-
-Post a comment on a github issue. Auth is required; be sure to auth with the
-`github` helper above first.
-
-```javascript
-var data = {
-  user: 'repo user',
-  repo: 'repo name',
-  number: 123,
-  body: 'Hello!'
-});
-grunt.helper('github-post-comment', data, function(err, res) {
-  if (err) { throw err; }
-  // Do something after comment posted
-});
-```
-
 ## Contributing
 
 Please open an issue or send a pull request. Thanks!

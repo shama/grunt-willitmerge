@@ -35,24 +35,6 @@ module.exports = function(grunt) {
     cb(null, github);
   });
 
-  // Post a comment to github
-  grunt.registerHelper('github-post-comment', function githubPostCommentHelper(data, callback) {
-    data = _.defaults(data, {
-      user: '',
-      repo: '',
-      number: 0,
-      body: ''
-    });
-    if (_.isBlank(data.body) || data.number > 0) {
-      return callback(); // add error
-    }
-    // TODO: Check if duplicate post
-    github.issues.createComment(data, function githubCreateComment(err, res) {
-      if (err) { throw err; }
-      callback(null, res);
-    });
-  });
-
   // Helper for consistent options key access across contrib tasks.
   // Borrowed from grunt-contrib :)
   grunt.registerHelper("options", function(data, defaults) {
