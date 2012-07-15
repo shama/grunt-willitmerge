@@ -25,7 +25,7 @@ module.exports = function(grunt) {
   // globals
   var _ = grunt.util._;
   var async = grunt.util.async;
-  var tmpPatch = path.join(__dirname, '../_tmp/' + process.pid + '.patch');
+  var tmpPatch = path.join(process.cwd(), '_tmp', process.pid + '.patch');
 
   // create readline interface
   var rl = readline.createInterface({
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
   // find this user and repo
   var userRepo = (function() {
     var res = {user:'',repo:''};
-    var repo = grunt.file.readJSON(path.join(__dirname, '../package.json')).repository;
+    var repo = grunt.file.readJSON(path.join(process.cwd(), 'package.json')).repository;
     if (repo.type === 'git' && _.isString(repo.url) && repo.url.indexOf('github.com') !== -1) {
       var arr = repo.url.split('/').slice(-2);
       res.user = arr[0];
