@@ -5,7 +5,7 @@
  * Copyright (c) 2012 Kyle Robinson Young
  * Licensed under the MIT license.
  */
-/*globals require:true, process:true, __dirname:true*/
+/*globals require:true, process:true*/
 
 module.exports = function(grunt) {
   'use strict';
