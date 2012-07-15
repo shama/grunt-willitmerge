@@ -4,6 +4,8 @@ A Grunt plugin to check if open Github pull requests are merge-able. If yes,
 option to merge the pull request. If no, option to notify the pull requester
 their request cannot be merged.
 
+![willitmerge sample](http://dontkry.com/img/willitmerge.png)
+
 ## Getting Started
 
 Install this grunt plugin next to your project's [Gruntfile][getting_started]
