@@ -134,7 +134,7 @@ module.exports = function(grunt) {
     rl.question('Merge this pull request? [y/N]', function questionMergePR(answer) {
       if (answer === 'y') {
         that.mergePullRequest(function(err, res) {
-          grunt.log.ok(res);
+          grunt.log.oklns(res);
           done();
         });
       } else {
@@ -203,7 +203,10 @@ module.exports = function(grunt) {
         done();
       }
       async.forEachSeries(issues, function(iss, next) {
-        wim.processIssue(iss, next);
+        wim.processIssue(iss, function() {
+          grunt.log.writeln();
+          next();
+        });
       }, function() {
         done();
       });
