@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Grunt? Will it merge? by shama</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Grunt? Will it merge?</h1>
+        <p>A Grunt plugin to check if open Github pull requests can be merged.</p>
+
+        <p class="view"><a href="https://github.com/shama/grunt-willitmerge">View the Project on GitHub <small>shama/grunt-willitmerge</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/shama/grunt-willitmerge/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/shama/grunt-willitmerge/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/shama/grunt-willitmerge">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>A Grunt plugin to check if open Github pull requests are merge-able. If yes,
+option to merge the pull request. If no, option to notify the pull requester
+their request cannot be merged.</p>
+
+<p><img src="http://dontkry.com/img/willitmerge.png" alt="willitmerge sample"></p>
+
+<h2>Getting Started</h2>
+
+<p>Install this grunt plugin next to your project's <a href="https://github.com/cowboy/grunt/blob/master/docs/getting_started.md">Gruntfile</a>
+with: <code>npm install grunt-willitmerge</code></p>
+
+<p>Then add this line to your project's Gruntfile:</p>
+
+<div class="highlight">
+<pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-willitmerge'</span><span class="p">);</span>
+</pre>
+</div>
+
+
+<h2>Included Task</h2>
+
+<h3>willitmerge</h3>
+
+<p>Add the task: <code>willitmerge: {}</code> to your gruntfile and run
+<code>grunt willitmerge</code>.</p>
+
+<p>If you would like to notify the pull requester with a comment that their
+pull request is unmergeable; use the following task options:</p>
+
+<div class="highlight">
+<pre><span class="nx">willitmerge</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">auth</span><span class="o">:</span> <span class="s1">'&lt;json:github_auth.json&gt;'</span><span class="p">,</span>
+    <span class="nx">comment</span><span class="o">:</span> <span class="s1">'Sorry, your pull request is unmergeable. '</span> <span class="o">+</span>
+      <span class="s1">'Could you please rebase, squash and force push it? Thanks!'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<p>Your auth info <em>should</em> be in a separate git ignored file, e.g.
+<code>github_auth.json</code> and would look like this:</p>
+
+<div class="highlight">
+<pre><span class="p">{</span>
+  <span class="nt">"username"</span><span class="p">:</span> <span class="s2">"myuser"</span><span class="p">,</span>
+  <span class="nt">"password"</span><span class="p">:</span> <span class="s2">"1234"</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<h4>Skipping Issues</h4>
+
+<p>If you would like to skip certain issues use the <code>ignore</code> option:</p>
+
+<div class="highlight">
+<pre><span class="nx">willitmerge</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">ignore</span><span class="o">:</span> <span class="p">[</span><span class="mi">123</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">111</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<h4>Repo and User</h4>
+
+<p>The repo and user of the github project are discovered from the <code>repository.url</code>
+setting in your <code>package.json</code>.</p>
+
+<h2>Included Helpers</h2>
+
+<h3>github([auth], callback(err, github))</h3>
+
+<p>Access the Github v3 API:
+<a href="http://ajaxorg.github.com/node-github/">node-github docs</a> and the
+<a href="http://developer.github.com/v3/">github docs</a>.</p>
+
+<div class="highlight">
+<pre><span class="kd">var</span> <span class="nx">auth</span> <span class="o">=</span> <span class="p">{</span><span class="nx">username</span><span class="o">:</span> <span class="s1">'shama'</span><span class="p">,</span> <span class="nx">password</span><span class="o">:</span> <span class="s1">'1234'</span><span class="p">};</span>
+<span class="nx">grunt</span><span class="p">.</span><span class="nx">helper</span><span class="p">(</span><span class="s1">'github'</span><span class="p">,</span> <span class="nx">auth</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">github</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span> <span class="p">}</span>
+  <span class="c1">// Use github to access the API</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h2>Contributing</h2>
+
+<p>Please open an issue or send a pull request. Thanks!</p>
+
+<h2>Release History</h2>
+
+<ul>
+<li>0.1.3 Restructure willitmerge task and minor fixes</li>
+<li>0.1.2 Fix path issues</li>
+<li>0.1.1 Remove unwanted helper</li>
+<li>0.1.0 Create willitmerge task</li>
+</ul><h2>License</h2>
+
+<p>Copyright (c) 2012 Kyle Robinson Young
+Licensed under the MIT license.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/shama">shama</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-33299491-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
