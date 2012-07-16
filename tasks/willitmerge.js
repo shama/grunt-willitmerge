@@ -12,14 +12,13 @@ module.exports = function(grunt) {
 
   var util = require('util');
   var events = require('events');
-
-  // libs
   var path = require('path');
   var fs = require('fs');
   var exec = require('child_process').exec;
+  var readline = require('readline');
+
   var request = require('request');
   var rimraf = require('rimraf');
-  var readline = require('readline');
 
   // TODO: ditch this when grunt v0.4 is released
   grunt.util = grunt.util || grunt.utils;
