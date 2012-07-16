@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 
   // libs
   var path = require('path');
+  var fs = require('fs');
   var exec = require('child_process').exec;
   var request = require('request');
   var rimraf = require('rimraf');
@@ -86,11 +87,11 @@ module.exports = function(grunt) {
       return done();
     }
     grunt.log.write('Issue #' + iss.number + ', ' + iss.html_url + ', will it merge? ');
-    request(iss.pull_request.patch_url, function patchRequest(err, res, body) {
-      if (!err && res.statusCode == 200) {
 
-        grunt.file.mkdir(path.dirname(that.tmpPatch));
-        grunt.file.write(that.tmpPatch, body);
+    grunt.file.mkdir(path.dirname(that.tmpPatch));
+    request(iss.pull_request.patch_url)
+      .on('end', function() {// why doesnt pipe work before end?
+
         var cmd = 'git apply --check --stat ' + that.tmpPatch;
         exec(cmd, function execCommand(err, stdout, stderr) {
           if (stderr) {
@@ -100,11 +101,8 @@ module.exports = function(grunt) {
           }
         });
 
-      } else {
-        // error?
-        return done();
-      }
-    });
+      })
+      .pipe(fs.createWriteStream(that.tmpPatch));
   };
 
   // if merge failed
