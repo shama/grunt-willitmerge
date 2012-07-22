@@ -1,26 +1,18 @@
 module.exports = function(grunt) {
   'use strict';
-
   grunt.initConfig({
     willitmerge: {
-      options: {
-        auth: '<json:github_auth.json>'
-      }
-    },
-    test: {
-      files: ['test/**/*.js']
+      
+      remote: 'test'
     },
     lint: {
-      files: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js']
+      files: ['grunt.js', 'tasks/**/*.js']
     },
     watch: {
       files: '<config:lint.files>',
       tasks: 'default'
     }
   });
-
   grunt.loadTasks('tasks');
-
-  grunt.registerTask('default', 'lint test');
-
+  grunt.registerTask('default', 'lint willitmerge');
 };
