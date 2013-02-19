@@ -1,7 +1,7 @@
 {
   "name": "grunt-willitmerge",
   "description": "A Grunt plugin to check if open Github pull requests are merge-able.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/shama/grunt-willitmerge",
   "author": {
     "name": "Kyle Robinson Young",
@@ -21,21 +21,26 @@
       "url": "https://github.com/shama/grunt-willitmerge/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "grunt.js",
-  "bin": "bin/grunt-willitmerge",
+  "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.6.0"
+    "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt nodeunit -v"
   },
   "dependencies": {
     "willitmerge": "~0.1.x"
   },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
   "devDependencies": {
-    "grunt": "~0.3.x"
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.1"
   },
   "keywords": [
-    "gruntplugin", "github", "pull request"
+    "gruntplugin",
+    "github",
+    "pull request"
   ]
 }
