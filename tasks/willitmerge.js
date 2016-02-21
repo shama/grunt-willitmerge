@@ -2,7 +2,7 @@
  * grunt-willitmerge
  * https://github.com/shama/grunt-github
  *
- * Copyright (c) 2013 Kyle Robinson Young
+ * Copyright (c) 2016 Kyle Robinson Young
  * Licensed under the MIT license.
  */
 /*globals require:true, process:true*/
