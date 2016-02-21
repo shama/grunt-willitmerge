@@ -44,6 +44,7 @@ Please open an issue or send a pull request. Thanks!
 
 ## Release History
 
+* 1.0.0 Tag grunt as peerDep at >= 0.4.0. Updating deps.
 * 0.3.0 Grunt v0.4 support.
 * 0.2.0 Become wrapper for willitmerge tool
 * 0.1.3 Restructure willitmerge task and minor fixes
